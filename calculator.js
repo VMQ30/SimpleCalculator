@@ -27,9 +27,15 @@ document.addEventListener(("DOMContentLoaded"), () =>{
             num.addEventListener(("click"), () =>{
 
                 if(equalPressed == true){
-                    clearNums();
+                    
+                    numDisplay.textContent = 0;
+                    firstOpperand = 0;
+                    secondOperand = 0;
+                    opperator = null;
+                    opperatorPressed = false;
+                    numberEquation.textContent = "";
                 }
-                
+
                 equalPressed = false;
                 
                 if(numDisplay.textContent == 0){
@@ -60,7 +66,13 @@ document.addEventListener(("DOMContentLoaded"), () =>{
         let equals = document.getElementById("equals");
         equals.addEventListener(("click"), () =>{
             calculateEquation();
+
+            if(equalPressed == false){
+                numberEquation.textContent += ` ${secondOperand} = ${answer}`
+                
+            }
             opperatorPressed = false;
+            equalPressed = true;
             
         })
     }
@@ -90,12 +102,9 @@ document.addEventListener(("DOMContentLoaded"), () =>{
                 answer = "Error";               
         }
 
-        if(equalPressed == false){
-            numberEquation.textContent += " " + num2 + " = " + answer;
-        }
-        
+        answer = answer.toFixed(2).replace(/\.00$/, '');
         numDisplay.textContent = answer;
-        equalPressed = true;
+        
     }
 
     function clearNums(){
@@ -112,7 +121,9 @@ document.addEventListener(("DOMContentLoaded"), () =>{
 
     function deleteNums(){
         let deleteButton = document.getElementById('delete');
+        
         deleteButton.addEventListener(("click"), () =>{
+            
             if(numDisplay.textContent.length == 1){
                 numDisplay.textContent = 0;
             }
@@ -135,6 +146,7 @@ document.addEventListener(("DOMContentLoaded"), () =>{
                     secondOperand = numDisplay.textContent;
                     calculateEquation();
                     firstOpperand = answer;
+                    
                 }
 
                 switch(button.textContent){
@@ -155,9 +167,9 @@ document.addEventListener(("DOMContentLoaded"), () =>{
                         break;                    
                 }
 
-                if(opperatorPressed == false){
-                    numberEquation.textContent = (firstOpperand + " " + opperator);
-                }
+                
+                numberEquation.textContent = (`${firstOpperand} ${opperator}`);
+                
                 
                 opperatorPressed = true;
                 numDisplay.textContent = 0;

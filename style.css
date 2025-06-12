@@ -10,13 +10,14 @@ html{
     height: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    padding: 0 70px;
+
+    overflow-x: hidden;
+    /* align-items: center; */
 }
 
-.body{
-    display:flex;
-    flex-wrap: wrap;
-    
+body{
+
 }
 
 .calculator{
@@ -32,6 +33,7 @@ html{
     box-shadow: 0 5px 20px rgba(221, 0, 89, 0.448),
         inset -10px -10px 30px rgba(255, 101, 162, 0.448),
         inset 10px 10px 10px rgba(255, 255, 255, 0.508);
+    margin-top: 40px;
 }
 div.buttons{
     display:flex;
@@ -121,5 +123,47 @@ p{
 
 #number-equation{
     font-size:20px;
+    align-self: flex-end;
+    opacity: 0.75;
+}
+
+.navbar{
+    padding:15px 40px;
+    display:flex;
+    justify-content: space-between;
+    border-bottom: solid;
+    border-color: rgb(255, 131, 172);
     align-self: flex-start;
+    width: 100%;
+}
+
+ul{
+    list-style-type:none;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    cursor: pointer;
+    align-items: center;
+}
+
+li{
+    margin-right: 40px;
+    font-weight: bold;
+    font-size:20px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    color: rgb(255, 131, 172);
+}
+
+ul li a {
+  text-decoration: none;
+  color: inherit; 
+}
+
+h2{
+    font-weight: 700px;
+    font-size:36px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(255, 243, 247);
+    text-shadow: 0 0 15px  rgb(255, 131, 172);
 }
