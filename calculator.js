@@ -10,10 +10,9 @@ document.addEventListener(("DOMContentLoaded"), () =>{
 
     clearNums();
     deleteNums();
-    
     numberButtonPress()
     operatorButtonPressed();
-
+    equalButton();
     //functions
 
     function numberButtonPress(){
@@ -31,15 +30,54 @@ document.addEventListener(("DOMContentLoaded"), () =>{
 
                 if(opperatorPressed == false){
                         firstOpperand = numDisplay.textContent;
-                        
                     }
 
                     if(opperatorPressed == true){
                         secondOperand = numDisplay.textContent;
-                        
                     }
             });
         });
+
+        let decimal = document.getElementById("decimal");
+        decimal.addEventListener("click", () =>{
+            if(!(numDisplay.textContent.includes("."))){
+                numDisplay.textContent += ".";
+            }
+        })
+    }
+
+    function equalButton(){
+        let equals = document.getElementById("equals");
+        equals.addEventListener(("click"), () =>{
+            calculateEquation();
+            opperatorPressed = false;
+        })
+    }
+
+    function calculateEquation(){
+
+        let num1 = parseFloat(firstOpperand);
+        let num2 = parseFloat(secondOperand);
+
+        switch(opperator){
+            case("+"):
+                answer = num1 + num2;
+                break;
+            case("-"):
+                answer = num1 - num2;
+                break;
+            case("*"):
+                answer = num1 * num2;
+                break;
+            case("/"):
+                answer = num1 / num2;
+                break;
+            case("%"):
+                answer = num1 % num2;
+                break;                
+        }
+
+        numDisplay.textContent = answer;
     }
     function clearNums(){
         let clearButton = document.getElementById('clear');
@@ -67,10 +105,6 @@ document.addEventListener(("DOMContentLoaded"), () =>{
         opperatorButton.forEach((button) =>{
 
             button.addEventListener(("click"), () =>{
-                console.log(opperatorPressed);
-                
-                
-
                 switch(button.textContent){
                     case("+"):
                         opperator = "+";
