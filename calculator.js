@@ -1,23 +1,46 @@
 document.addEventListener(("DOMContentLoaded"), () =>{
     let numButtons = document.querySelectorAll(".num-button");
     let numDisplay = document.getElementById("number-text");
-    
+
+    let firstOpperand = 0;
+    let secondOperand = 0;
+    let opperator;
+    let answer = 0;
+    let opperatorPressed = false;
+
     clearNums();
     deleteNums();
-
-    //displaying number based on button pressed
-    numButtons.forEach((num) =>{
-        num.addEventListener(("click"), () =>{
-            if(numDisplay.textContent == 0){
-                numDisplay.textContent = num.textContent;
-            }
-            else{
-                numDisplay.textContent += num.textContent;
-            }
-        });
-    });
+    
+    numberButtonPress()
+    operatorButtonPressed();
 
     //functions
+
+    function numberButtonPress(){
+        numButtons.forEach((num) =>{
+            num.addEventListener(("click"), () =>{
+                if(numDisplay.textContent.length == 1 && !Number.isInteger(Number(numDisplay.textContent))){
+                    numDisplay.textContent = num.textContent;
+                }
+                else if(numDisplay.textContent == 0){
+                    numDisplay.textContent = num.textContent;
+                }
+                else{
+                    numDisplay.textContent += num.textContent;
+                }
+
+                if(opperatorPressed == false){
+                        firstOpperand = numDisplay.textContent;
+                        
+                    }
+
+                    if(opperatorPressed == true){
+                        secondOperand = numDisplay.textContent;
+                        
+                    }
+            });
+        });
+    }
     function clearNums(){
         let clearButton = document.getElementById('clear');
             clearButton.addEventListener(("click"), () =>{
@@ -38,6 +61,39 @@ document.addEventListener(("DOMContentLoaded"), () =>{
         });
     }
 
+    function operatorButtonPressed(){
+        
+        let opperatorButton = document.querySelectorAll(".operator");
+        opperatorButton.forEach((button) =>{
+
+            button.addEventListener(("click"), () =>{
+                console.log(opperatorPressed);
+                
+                
+
+                switch(button.textContent){
+                    case("+"):
+                        opperator = "+";
+                        break;
+                    case("-"):
+                        opperator = "-";
+                        break;
+                    case("*"):
+                        opperator = "*";
+                        break;
+                    case("/"):
+                        opperator = "/";
+                        break;
+                    case("%"):
+                        opperator = "%";
+                        break;                
+                }
+                opperatorPressed = true;
+                numDisplay.textContent = button.textContent;
+
+            });
+        });
+    }
 
 });
 
