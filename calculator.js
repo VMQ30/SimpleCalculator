@@ -7,6 +7,7 @@ document.addEventListener(("DOMContentLoaded"), () =>{
     let opperator;
     let answer = 0;
     let opperatorPressed = false;
+    let equalPressed = false;
 
     clearNums();
     deleteNums();
@@ -32,9 +33,9 @@ document.addEventListener(("DOMContentLoaded"), () =>{
                         firstOpperand = numDisplay.textContent;
                     }
 
-                    if(opperatorPressed == true){
-                        secondOperand = numDisplay.textContent;
-                    }
+                if(opperatorPressed == true){
+                    secondOperand = numDisplay.textContent;
+                }
             });
         });
 
@@ -74,15 +75,22 @@ document.addEventListener(("DOMContentLoaded"), () =>{
                 break;
             case("%"):
                 answer = num1 % num2;
-                break;                
+                break;     
+            default:
+                answer = "Error";               
         }
 
         numDisplay.textContent = answer;
     }
+
     function clearNums(){
         let clearButton = document.getElementById('clear');
             clearButton.addEventListener(("click"), () =>{
             numDisplay.textContent = 0;
+            firstOpperand = 0;
+            secondOperand = 0;
+            opperator = null;
+            opperatorPressed = false;
         });
     }
 
@@ -105,6 +113,13 @@ document.addEventListener(("DOMContentLoaded"), () =>{
         opperatorButton.forEach((button) =>{
 
             button.addEventListener(("click"), () =>{
+
+                if(opperatorPressed == true){
+                    secondOperand = numDisplay.textContent;
+                    calculateEquation();
+                    firstOpperand = answer;
+                }
+
                 switch(button.textContent){
                     case("+"):
                         opperator = "+";
@@ -120,10 +135,11 @@ document.addEventListener(("DOMContentLoaded"), () =>{
                         break;
                     case("%"):
                         opperator = "%";
-                        break;                
+                        break;                    
                 }
                 opperatorPressed = true;
                 numDisplay.textContent = button.textContent;
+                
 
             });
         });
