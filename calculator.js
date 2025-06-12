@@ -1,7 +1,9 @@
 document.addEventListener(("DOMContentLoaded"), () =>{
     let numButtons = document.querySelectorAll(".num-button");
     let numDisplay = document.getElementById("number-text");
-
+    let numberEquation = document.getElementById("number-equation");
+    let numEquation;
+    
     let firstOpperand = 0;
     let secondOperand = 0;
     let opperator;
@@ -14,15 +16,23 @@ document.addEventListener(("DOMContentLoaded"), () =>{
     numberButtonPress()
     operatorButtonPressed();
     equalButton();
+
+
+
     //functions
 
     function numberButtonPress(){
         numButtons.forEach((num) =>{
+            
             num.addEventListener(("click"), () =>{
-                if(numDisplay.textContent.length == 1 && !Number.isInteger(Number(numDisplay.textContent))){
-                    numDisplay.textContent = num.textContent;
+
+                if(equalPressed == true){
+                    clearNums();
                 }
-                else if(numDisplay.textContent == 0){
+                
+                equalPressed = false;
+                
+                if(numDisplay.textContent == 0){
                     numDisplay.textContent = num.textContent;
                 }
                 else{
@@ -30,9 +40,8 @@ document.addEventListener(("DOMContentLoaded"), () =>{
                 }
 
                 if(opperatorPressed == false){
-                        firstOpperand = numDisplay.textContent;
-                    }
-
+                    firstOpperand = numDisplay.textContent;
+                }
                 if(opperatorPressed == true){
                     secondOperand = numDisplay.textContent;
                 }
@@ -52,6 +61,7 @@ document.addEventListener(("DOMContentLoaded"), () =>{
         equals.addEventListener(("click"), () =>{
             calculateEquation();
             opperatorPressed = false;
+            
         })
     }
 
@@ -80,7 +90,12 @@ document.addEventListener(("DOMContentLoaded"), () =>{
                 answer = "Error";               
         }
 
+        if(equalPressed == false){
+            numberEquation.textContent += " " + num2 + " = " + answer;
+        }
+        
         numDisplay.textContent = answer;
+        equalPressed = true;
     }
 
     function clearNums(){
@@ -91,6 +106,7 @@ document.addEventListener(("DOMContentLoaded"), () =>{
             secondOperand = 0;
             opperator = null;
             opperatorPressed = false;
+            numberEquation.textContent = "";
         });
     }
 
@@ -105,6 +121,7 @@ document.addEventListener(("DOMContentLoaded"), () =>{
             }
             
         });
+
     }
 
     function operatorButtonPressed(){
@@ -137,10 +154,13 @@ document.addEventListener(("DOMContentLoaded"), () =>{
                         opperator = "%";
                         break;                    
                 }
-                opperatorPressed = true;
-                numDisplay.textContent = button.textContent;
-                
 
+                if(opperatorPressed == false){
+                    numberEquation.textContent = (firstOpperand + " " + opperator);
+                }
+                
+                opperatorPressed = true;
+                numDisplay.textContent = 0;
             });
         });
     }

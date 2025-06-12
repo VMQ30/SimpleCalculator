@@ -107,6 +107,7 @@ button:active{
     justify-content: flex-end;
     align-items: flex-end;
     overflow-x:auto;
+    flex-direction:column;
 }
 
 p{
@@ -114,4 +115,11 @@ p{
     font-family: 'Orbitron', sans-serif;
     font-size:40px;
     color:  rgb(255, 106, 161);
+    margin-top:0;
+    margin-bottom: 5px;
+}
+
+#number-equation{
+    font-size:20px;
+    align-self: flex-start;
 }
